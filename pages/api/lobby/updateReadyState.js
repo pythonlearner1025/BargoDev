@@ -1,6 +1,6 @@
 import cookie from "cookie";
-import {roomId} from "../../data/roomId";
-import redis from "../../utils/redis";
+import {roomId} from "../../../data/roomId";
+import redis from "../../../utils/redis";
 
 
 export default async function handle(req,res){

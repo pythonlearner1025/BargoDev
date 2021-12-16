@@ -35,7 +35,7 @@ BACKEND RELAY:
 // create game-room to redis database if one player connects
 async function createGame(){
     console.log('in createGame');
-    await fetch('/api/create', {
+    await fetch('/api/lobby/create', {
         body: JSON.stringify({
             createNew: true,
         }),
@@ -100,7 +100,7 @@ export default function Role(){
     // now be set equal to the sessionId of user
     // however, if gameState.roleA is occupied,
     // nothing will happen
-    await fetch('/api/logClick',{
+    await fetch('/api/cookies/logClick',{
         method: 'POST',
         headers: {
             "Content-Type": "application/json"
@@ -113,7 +113,7 @@ export default function Role(){
     // check if the modified role is equal to the sessionId
     // if so, return true. click is valid
     // else, return false. click is not valid
-    const response = await fetch('/api/isClickValid');
+    const response = await fetch('/api/lobby/isClickValid');
     const data = await response.json();
     const gameState = data.gameState;
 
@@ -127,7 +127,7 @@ export default function Role(){
 }
 
     async function updateState(userAccount, readyState){
-        const response = await fetch('/api/updateReadyState',{
+        const response = await fetch('/api/lobby/updateReadyState',{
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
@@ -138,7 +138,7 @@ export default function Role(){
     }
 
     async function isGameStateValid(){
-        const jsonResp = await fetch('/api/checkReadyState');
+        const jsonResp = await fetch('/api/lobby/checkReadyState');
         const resp = await jsonResp.json();
         // checkReadyState either returns true or false value in its ready
         if (resp.ready === true){
@@ -170,7 +170,7 @@ export default function Role(){
 
     async function submitCookie(accountVal){
         console.log('cookie submitted');
-        const response = await fetch('/api/logCookie',{
+        const response = await fetch('/api/cookies/logCookie',{
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
@@ -223,7 +223,7 @@ export default function Role(){
     // the client should constantly check with server to see if 
     // other user has also clicked ready state
     // if this is fulfilled, begin game and update UI accordingly
-    const handleGameGeneration = () => {
+    function handleGameGeneration(){
         if (buttonState === 0){
             setButtonState(1);
             const updated = updateState(userAccount, true);
@@ -237,6 +237,7 @@ export default function Role(){
                     isValid.then(result => {
                         if (result === true){
                         console.log('both parties ready'); 
+                        fetch('/api/lobby/sendToGame')
                         router.push({pathname: '/posts/game'}) 
                         clearInterval(checkReadyStatus);
                         }

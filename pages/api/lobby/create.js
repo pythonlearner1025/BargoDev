@@ -1,6 +1,6 @@
-import redis from '../../utils/redis'
-import {roomId} from '../../data/roomId'
-import {gameState} from '../../data/gameState'
+import redis from '../../../utils/redis'
+import {roomId} from '../../../data/roomId'
+import {gameState} from '../../../data/gameState'
 
 
 // first create and upload game-datastore template to redis

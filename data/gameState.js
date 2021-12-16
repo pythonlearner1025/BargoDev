@@ -19,25 +19,39 @@ export const gameState = {
         ready: '',
         selection: []
     },
+    
+    gameParams: undefined,
+    // sample GameState = {
+        /*
+        interests: [
+            {name: 'Bonus',
+             options: [
+               '10',
+               '8',
+               '6',
+               '4',
+               '2',
+             ],
+              scores: [
+                4000,
+                3000,
+                2000,
+                1000,
+                0
+              ]},
+            {name: 'B',
+             options: [
+               '-1',
+               '-2',
+               '-3',
+               '-4',
+               '-5',
+             ],
+              scores: [
+                0,
+                -1000,
+                -2000,
+                -3000,
+                -4000
+        */
 }
-
-/*
-const sampleGameState = {
-    scenario: "scenarioName",
-    interestNum: 1,
-    interests: [
-        {
-            name: 'bonus',
-            sign: '%',
-            options: [
-                {'10': 4000},
-                {'8':3000},
-                {'6':2000},
-                {'4':1000},
-                {'2':0}
-            ]
-        },
-        // etc, etc
-    ]
-}
-*/
